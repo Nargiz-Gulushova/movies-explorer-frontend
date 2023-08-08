@@ -38,7 +38,7 @@ const Profile = ({ onLogout }) => {
           >
             <div className='profile__input-wrapper'>
               <label className='profile__label'>
-                <p className='profile__label-name'>Имя</p>
+                <span className='profile__label-name'>Имя</span>
                 <input
                   className='profile__input'
                   name='name'
@@ -55,7 +55,7 @@ const Profile = ({ onLogout }) => {
             </div>
             <div className='profile__input-wrapper'>
               <label className='profile__label'>
-                <p className='profile__label-name'>E-mail</p>
+                <span className='profile__label-name'>E-mail</span>
                 <input
                   className='profile__input'
                   name='email'

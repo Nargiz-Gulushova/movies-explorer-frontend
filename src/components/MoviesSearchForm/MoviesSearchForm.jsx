@@ -1,8 +1,8 @@
 import './MoviesSearchForm.css';
 
-const MoviesSearchForm = (props) => {
+const MoviesSearchForm = () => {
   return (
-    <section className='search'>
+    <section className='search' aria-label='Форма поиска фильмов'>
       <form className='search__form'>
         <div className='search__form-container'>
           <div className='search__input-wrapper'>
@@ -27,7 +27,7 @@ const MoviesSearchForm = (props) => {
               defaultChecked={true}
             />
             <span className='search__checkbox-span' />
-            <p className='search__caption'>Короткометражки</p>
+            <span className='search__caption'>Короткометражки</span>
           </label>
         </div>
       </form>

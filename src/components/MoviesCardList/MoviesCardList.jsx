@@ -1,10 +1,12 @@
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 import { MOVIE_RENDER_CONFIG } from '../../utils/config';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Preloader from '../Preloader/Preloader';
+import { DeviceContext } from '../../contexts/DeviceContext';
 
-const MoviesCardList = ({ movies, isMainMoviesPage, device }) => {
+const MoviesCardList = ({ movies, isMainMoviesPage }) => {
+  const device = useContext(DeviceContext);
   const [toShow, setToShow] = useState(0);
   const [page, setPage] = useState(0);
   const [isMoreButton, setIsMoreButton] = useState({

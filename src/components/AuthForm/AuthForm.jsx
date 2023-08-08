@@ -44,7 +44,7 @@ const AuthForm = ({ isLoginForm, onLogin }) => {
               <p className='auth__input-name'>Имя</p>
               <input
                 name='name'
-                type='name'
+                type='text'
                 className='auth__input'
                 placeholder={'Введите имя'}
                 value={formValues.name}
@@ -53,7 +53,7 @@ const AuthForm = ({ isLoginForm, onLogin }) => {
                 maxLength={30}
                 required
               />
-              <span className='auth__input-error'>test</span>
+              <span className='auth__input-error'></span>
             </div>
           )}
           <div className='auth__input-wrapper'>

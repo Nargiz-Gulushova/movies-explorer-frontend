@@ -47,7 +47,7 @@ const MoviesCard = (props) => {
       </div>
       <img
         src={props.image}
-        alt={props.name}
+        alt={`Постер фильма ${props.name}`}
         className='card__image'
       />
     </div>

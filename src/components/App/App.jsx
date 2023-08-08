@@ -18,7 +18,7 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState({
     name: 'Виталий',
     email: 'pochta@yandex.ru',
-    isLoggedIn: true,
+    isLoggedIn: false,
   });
   // page checker
   const isMainMoviesPage = loc === '/movies';
@@ -74,7 +74,6 @@ export default function App() {
             element={
               <Movies
                 isMainMoviesPage={isMainMoviesPage}
-                device={device}
               />
             }
           />

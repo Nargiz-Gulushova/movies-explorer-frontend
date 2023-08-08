@@ -42,6 +42,10 @@
   line-height: normal;
 }
 
+.profile__input:focus {
+  font-weight: 500;
+}
+
 .profile__input {
   max-width: 85%;
   text-align: right;
@@ -53,6 +57,10 @@
   border: none;
   outline: none;
   background-color: transparent;
+}
+
+.profile__input:invalid {
+  color: var(--error-color);
 }
 
 .profile__input-error {

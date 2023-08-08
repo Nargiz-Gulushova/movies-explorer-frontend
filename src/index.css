@@ -26,6 +26,11 @@
   --link-hover: .7;
 }
 
+html,
+body {
+  scrollbar-gutter: stable;
+}
+
 .root {
   min-height: 100vh;
   background-color: var(--bg-main);

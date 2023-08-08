@@ -81,6 +81,10 @@
   font-weight: 500;
 }
 
+.auth__input:invalid {
+  color: var(--error-color);
+}
+
 .auth__input-error {
   min-height: 16px;
   font-size: 10px;
