@@ -127,3 +127,51 @@
   font-weight: 400;
   line-height: normal;
 }
+
+@media screen and (max-width: 1024px) {
+  .auth__form {
+    grid-template-rows: auto 356px auto;
+  }
+  .auth__heading {
+    padding-top: 10px;
+    justify-content: flex-end;
+  }
+  .auth__form-inputs {
+    padding-top: 40px;
+  }
+  .auth__button-wrapper {
+    padding-top: 20px;
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .auth {
+    width: 260px;
+  }
+  .auth__button {
+    width: 260px;
+    font-size: 12px;
+  }
+  .auth__heading {
+    justify-content: center;
+    align-items: center;
+    padding-top: 13px;
+  }
+  .auth__title {
+    padding-top: 50px;
+  }
+  .auth__form-inputs {
+    padding-top: 38px;
+  }
+  .auth__button-wrapper {
+    justify-content: flex-end;
+    padding-bottom: 20px;
+  }
+  .auth__caption {
+    font-size: 12px;
+  }
+  .auth__link {
+    font-size: 12px;
+  }
+}
