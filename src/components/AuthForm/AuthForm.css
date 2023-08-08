@@ -68,6 +68,7 @@
   outline: none;
   background-color: transparent;
   border-bottom: 1px solid var(--border);
+  border-radius: 0;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

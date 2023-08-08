@@ -69,3 +69,17 @@
     line-height: 18px; /* 138.462% */
   }
 }
+
+@media screen and (max-width: 700px) {
+  .nav-auth__menu {
+    padding-top: 145px;
+    gap: 25px;
+  }
+  .nav-auth__link {
+    padding-bottom: 7px;
+  }
+  .nav-auth__link_type_profile {
+    margin: 0 auto 45px;
+    font-size: 14px;
+  }
+}
