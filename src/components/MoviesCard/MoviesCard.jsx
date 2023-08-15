@@ -34,6 +34,10 @@ const MoviesCard = (props) => {
     return `${hours > 0 ? hours + 'ч ' : ''}${minutes > 0 ? minutes + 'м' : ''}`;
   };
 
+  const openTrailer = (link) => {
+    window.open(link, '_blank');
+  }
+
   return (
     <div className="card">
       <div className="card__heading-wrapper">
@@ -46,6 +50,7 @@ const MoviesCard = (props) => {
       <img src={props.image}
            alt={`Постер фильма ${props.name}`}
            className="card__image"
+           onClick={() => openTrailer(props.movie.trailerLink)}
       />
     </div>
   );
