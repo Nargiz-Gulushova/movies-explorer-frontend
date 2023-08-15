@@ -99,23 +99,25 @@ const MoviesCardList = ({
     }
   };
 
+  const showButton = isMainMoviesPage && isMoreButton.show && !requestStatus.isLoading;
+
   return (
     <section className={isMainMoviesPage ? 'movies' : 'movies movies_type_saved'}>
 
       {searchStatus.isFirstSearch || searchStatus.isError
         ? <h1 className={'movies__error'}>{searchStatus.errorMessage}</h1>
-        : searchStatus.isLoading
+        : searchStatus.isLoading || isMoreButton.loading || requestStatus.isLoading
           ? <Preloader/>
-          : <ul className="movies__list">{renderMovies()}</ul>
-      }
-      {isMoreButton.loading && <Preloader/>}
-      {requestStatus.isLoading && <Preloader/>}
-      {isMainMoviesPage && isMoreButton.show &&
-        <button type="button"
-                className="movies__load-more-button button-hover"
-                onClick={handleChangePage}>
-          Ещё
-        </button>
+          : <>
+            <ul className="movies__list">{renderMovies()}</ul>
+            {showButton &&
+              <button type="button"
+                      className="movies__load-more-button button-hover"
+                      onClick={handleChangePage}>
+                Ещё
+              </button>
+            }
+          </>
       }
     </section>
   );

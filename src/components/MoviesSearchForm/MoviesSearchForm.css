@@ -59,7 +59,7 @@
 .search__submit-button {
   border: none;
   padding: 0;
-  min-width: 35px;
+  min-width: 36px;
   min-height: 34px;
   background-color: transparent;
   background-image: url('../../images/find-min.svg');

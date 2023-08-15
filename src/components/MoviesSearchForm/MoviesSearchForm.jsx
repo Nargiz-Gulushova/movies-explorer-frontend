@@ -1,7 +1,12 @@
 import './MoviesSearchForm.css';
 
-const MoviesSearchForm = ({ searchQuery, onChange, onCheckboxChange, onSubmit, searchStatus }) => {
-
+const MoviesSearchForm = ({
+                            searchQuery,
+                            onChange,
+                            onCheckboxChange,
+                            onSubmit,
+                            searchStatus,
+                          }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -10,7 +15,7 @@ const MoviesSearchForm = ({ searchQuery, onChange, onCheckboxChange, onSubmit, s
 
   return (
     <section className="search" aria-label="Форма поиска фильмов">
-      <form className="search__form" onSubmit={handleSubmit}>
+      <form className="search__form" onSubmit={handleSubmit} noValidate>
         <div className="search__form-container">
           <div className="search__input-wrapper">
             <div className="search__icon-wrapper">

@@ -97,6 +97,10 @@ export const useSearch = ({
   };
 
   const handleSubmit = (query) => {
+    if (!query.search && isMainMoviesPage) {
+      return setError('Для поиска нужно ввести ключевой запрос.');
+    }
+
     setSearchStatus({
       isLoading: true,
       isError: false,

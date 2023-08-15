@@ -7,7 +7,14 @@ import { useState } from 'react';
 import { useSearch } from '../../hooks/useSearch';
 import { LOCAL_STORAGE_SEARCH_KEY } from '../../utils/config';
 
-const Movies = ({ movies, savedMovies, setError, requestStatus, onSave, onDelete }) => {
+const Movies = ({
+                  movies,
+                  savedMovies,
+                  setError,
+                  requestStatus,
+                  onSave,
+                  onDelete,
+}) => {
 
   const [ searchStatus, setSearchStatus ] = useState({
     isError: false,

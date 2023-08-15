@@ -227,6 +227,7 @@ export default function App() {
                    <SavedMovies movies={savedMovies}
                                 requestStatus={requestStatus}
                                 onDelete={handleDeleteMovie}
+                                setError={setError}
                    />
                  }
           />
