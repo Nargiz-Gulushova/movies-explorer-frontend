@@ -1,12 +1,14 @@
 import AuthForm from '../AuthForm/AuthForm';
-import './Login.css';
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin, requestStatus }) => {
   return (
     <main>
-      <AuthForm isLoginForm={true} onLogin={onLogin} />
+      <AuthForm isLoginForm={true}
+                onLogin={onLogin}
+                requestStatus={requestStatus}
+      />
     </main>
-  )
+  );
 };
 
 export default Login;

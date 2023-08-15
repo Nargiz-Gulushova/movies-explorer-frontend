@@ -4,9 +4,11 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .header_auth {
   justify-content: flex-start;
 }
+
 .header__logo {
   min-width: 38px;
   min-height: 38px;

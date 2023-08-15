@@ -9,11 +9,15 @@ const Header = () => {
   const { isLoggedIn } = useContext(CurrentUserContext);
 
   return (
-    <header className={isLoggedIn ? 'header header_auth' : 'header'}>
-      <div className="header__logo button-hover" onClick={() => navigate('/')}></div>
-      <Navigation />
+    <header className={isLoggedIn
+      ? 'header header_auth'
+      : 'header'}>
+      <div className="header__logo button-hover"
+           onClick={() => navigate('/')}
+      />
+      <Navigation/>
     </header>
-  )
+  );
 };
 
 export default Header;

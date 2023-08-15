@@ -49,10 +49,12 @@
     grid-template-columns: 1fr;
     grid-template-rows: 5fr 3fr;
   }
+
   .not-found__wrapper {
     margin-top: auto;
     padding-bottom: 39px;
   }
+
   .not-found__button {
     margin-bottom: 77px;
   }
@@ -62,9 +64,11 @@
   .not-found__title {
     font-size: 80px;
   }
+
   .not-found__caption {
     font-size: 12px;
   }
+
   .not-found__button {
     margin: auto 0 30px 0;
     font-size: 12px;

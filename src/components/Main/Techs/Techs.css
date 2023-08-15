@@ -57,15 +57,18 @@
   .techs {
     padding: 90px 50px;
   }
+
   .techs__title {
     padding: 79px 0 22px;
   }
+
   .techs__caption {
     font-size: 12px;
     line-height: 18px; /* 150% */
     letter-spacing: -0.48px;
     padding-bottom: 83px;
   }
+
   .techs__item {
     min-width: 84px;
     min-height: 57px;
@@ -80,14 +83,17 @@
     flex-wrap: wrap;
     justify-content: flex-start;
   }
+
   .techs {
     padding: 68px 18px;
   }
+
   .techs__title {
     font-size: 30px;
     letter-spacing: -1.2px;
     padding: 49px 0 12px;
   }
+
   .techs__caption {
     font-size: 11px;
     line-height: 16px; /* 145.455% */

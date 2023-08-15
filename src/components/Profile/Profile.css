@@ -59,7 +59,7 @@
   background-color: transparent;
 }
 
-.profile__input:invalid {
+.profile__input_invalid {
   color: var(--error-color);
 }
 
@@ -92,6 +92,10 @@
 
 .profile__button_type_edit {
   color: var(--primary-color);
+}
+
+.profile__button_type_edit:disabled {
+  cursor: not-allowed;
 }
 
 .profile__button_type_logout {

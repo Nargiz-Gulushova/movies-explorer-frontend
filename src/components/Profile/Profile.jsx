@@ -1,87 +1,96 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import Header from '../Header/Header';
 import './Profile.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Preloader from '../Preloader/Preloader';
+import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-const Profile = ({ onLogout }) => {
+const Profile = ({ onLogout, onEdit, requestStatus }) => {
+  const {
+    values,
+    errors,
+    isValid,
+    handleChange,
+    handleChangeEmail,
+    setValues,
+    setValid,
+  } = useFormAndValidation();
   const currentUser = useContext(CurrentUserContext);
-  const [isLoading, setLoading] = useState(false);
-  const [formValues, setFormValues] = useState({
-    name: currentUser.name,
-    email: currentUser.email,
-  });
+  const { isLoading } = requestStatus;
 
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
+  useEffect(() => {
+    setValues({
+      name: currentUser.name,
+      email: currentUser.email,
+    });
+  }, [ currentUser ]);
 
-    setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
-  };
+  useEffect(() => {
+    if (values.name === currentUser.name && values.email === currentUser.email) {
+      setValid(false);
+    }
+  }, [ values, currentUser ]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
+    onEdit({
+      name: values.name,
+      email: values.email,
+    });
   };
 
   return (
     <>
-      <Header />
+      <Header/>
       <main>
-        <section className='profile'>
-          <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
-          <form
-            className='profile__form'
-            onSubmit={handleSubmit}
+        <section className="profile">
+          <h1 className="profile__title">Привет, {currentUser.name}!</h1>
+          <form className="profile__form"
+                onSubmit={handleSubmit}
           >
-            <div className='profile__input-wrapper'>
-              <label className='profile__label'>
-                <span className='profile__label-name'>Имя</span>
-                <input
-                  className='profile__input'
-                  name='name'
-                  type='text'
-                  placeholder='Введите имя'
-                  value={formValues.name ?? ''}
-                  minLength={2}
-                  maxLength={30}
-                  onChange={handleChange}
-                  required
+            <div className="profile__input-wrapper">
+              <label className="profile__label">
+                <span className="profile__label-name">Имя</span>
+                <input className={`profile__input ${errors.name && 'profile__input_invalid'}`}
+                       name="name"
+                       type="text"
+                       placeholder="Введите имя"
+                       value={values.name ?? ''}
+                       minLength={2}
+                       maxLength={30}
+                       onChange={handleChange}
+                       required
                 />
               </label>
-              <span className='profile__input-error'></span>
+              <span className="profile__input-error">{errors.name}</span>
             </div>
-            <div className='profile__input-wrapper'>
-              <label className='profile__label'>
-                <span className='profile__label-name'>E-mail</span>
-                <input
-                  className='profile__input'
-                  name='email'
-                  type='email'
-                  placeholder='Введите e-mail'
-                  value={formValues.email ?? ''}
-                  onChange={handleChange}
-                  required
+            <div className="profile__input-wrapper">
+              <label className="profile__label">
+                <span className="profile__label-name">E-mail</span>
+                <input className={`profile__input ${errors.email && 'profile__input_invalid'}`}
+                       name="email"
+                       type="email"
+                       placeholder="Введите e-mail"
+                       value={values.email ?? ''}
+                       onChange={handleChangeEmail}
+                       required
                 />
               </label>
-              <span className='profile__input-error'></span>
+              <span className="profile__input-error">{errors.email}</span>
             </div>
             {isLoading ? (
-              <Preloader />
+              <Preloader/>
             ) : (
-              <div className='profile__buttons-wrapper'>
-                <button
-                  type='submit'
-                  className='profile__button profile__button_type_edit button-hover'
+              <div className="profile__buttons-wrapper">
+                <button type="submit"
+                        disabled={!isValid}
+                        className="profile__button profile__button_type_edit button-hover"
                 >
                   Редактировать
                 </button>
-                <button
-                  type='button'
-                  className='profile__button profile__button_type_logout button-hover'
-                  onClick={onLogout}
+                <button type="button"
+                        className="profile__button profile__button_type_logout button-hover"
+                        onClick={onLogout}
                 >
                   Выйти из аккаунта
                 </button>

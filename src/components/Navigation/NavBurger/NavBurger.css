@@ -11,10 +11,12 @@
   cursor: pointer;
   transition: all .2s;
 }
+
 .burger__overlay_active {
   visibility: visible;
   opacity: 1;
 }
+
 .burger__wrapper {
   position: fixed;
   top: 0;
@@ -28,11 +30,13 @@
   transform: translateX(+100%);
   transition: all .2s;
 }
+
 .burger__wrapper_active {
   visibility: visible;
   opacity: 1;
   transform: translateX(0);
 }
+
 .burger__content {
   cursor: default;
   position: relative;
@@ -44,6 +48,7 @@
   flex-direction: column;
   align-items: center;
 }
+
 .burger__close-button {
   padding: 0;
   position: absolute;
@@ -66,6 +71,7 @@
     top: 18px;
     right: 18px;
   }
+
   .burger__close-button {
     top: 21px;
     right: 21px;

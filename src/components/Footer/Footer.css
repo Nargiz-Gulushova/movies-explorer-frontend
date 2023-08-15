@@ -1,6 +1,7 @@
 .footer {
   padding: 56px 70px 20px;
 }
+
 .footer__caption {
   margin: 0;
   padding-bottom: 20px;
@@ -12,16 +13,19 @@
   line-height: normal;
   border-bottom: 1px solid var(--border);
 }
+
 .footer__wrapper {
   display: flex;
   justify-content: space-between;
   padding-top: 20px;
 }
+
 .footer__copyright {
   margin: 0;
   font-size: 13px;
   color: var(--primary-color);
 }
+
 .footer__list {
   list-style: none;
   margin: 0;
@@ -30,6 +34,7 @@
   align-items: center;
   gap: 20px;
 }
+
 .footer__link {
   text-decoration: none;
   color: var(--primary-color);
@@ -49,22 +54,27 @@
   .footer {
     padding: 36px 10px 20px;
   }
+
   .footer__caption {
     font-size: 12px;
     padding-bottom: 22px;
   }
+
   .footer__wrapper {
     padding-top: 27px;
     flex-direction: column-reverse;
     gap: 30px;
   }
+
   .footer__list {
     flex-direction: column;
     gap: 9px;
   }
+
   .footer__link {
     font-size: 12px;
   }
+
   .footer__copyright {
     color: var(--caption-color);
     text-align: center;

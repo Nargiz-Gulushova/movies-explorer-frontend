@@ -2,8 +2,7 @@
   border: 0;
   width: 40px;
   height: 40px;
-  background-color: transparent;
-  background: url('../../images/burger-min.svg') center center no-repeat;
+  background: transparent url('../../images/burger-min.svg') no-repeat center center;
   margin-left: auto;
 }
 

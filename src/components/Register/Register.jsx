@@ -1,12 +1,14 @@
 import AuthForm from '../AuthForm/AuthForm';
-import './Register.css';
 
-const Register = () => {
+const Register = ({ onRegister, requestStatus }) => {
   return (
     <main>
-      <AuthForm isLoginForm={false} />
+      <AuthForm isLoginForm={false}
+                onRegister={onRegister}
+                requestStatus={requestStatus}
+      />
     </main>
-  )
+  );
 };
 
 export default Register;
