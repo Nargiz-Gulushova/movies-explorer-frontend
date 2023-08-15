@@ -1,10 +1,14 @@
 import './AuthForm.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
+import { useContext } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { APP_ROUTER } from '../../utils/config';
 
 const AuthForm = ({ isLoginForm, onLogin, onRegister, requestStatus }) => {
   const navigate = useNavigate();
+  const { isLoggedIn } = useContext(CurrentUserContext);
   const {
     values,
     errors,
@@ -30,8 +34,9 @@ const AuthForm = ({ isLoginForm, onLogin, onRegister, requestStatus }) => {
     }
   };
 
-  return (
-    <section className="auth">
+  return isLoggedIn
+      ? <Navigate to={APP_ROUTER.movies} replace={true} />
+      : <section className="auth">
       <form className="auth__form"
             onSubmit={handleSubmit}
       >
@@ -125,7 +130,6 @@ const AuthForm = ({ isLoginForm, onLogin, onRegister, requestStatus }) => {
         }
       </form>
     </section>
-  );
 };
 
 export default AuthForm;

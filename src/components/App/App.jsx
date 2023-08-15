@@ -20,6 +20,7 @@ import {
 import { MAIN_API } from '../../utils/MainApi';
 import InfoTooltip from '../InfoToolTip/InfoToolTip';
 import { MOVIES_API } from '../../utils/MoviesApi';
+import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 
 export default function App() {
   const navigate = useNavigate();
@@ -62,7 +63,6 @@ export default function App() {
 
   useEffect(() => {
     if (currentUser.isLoggedIn) {
-      handleLoader(true);
       Promise.all([
         MOVIES_API.getMovies(),
         MAIN_API.getMovies(),
@@ -85,8 +85,7 @@ export default function App() {
           console.error(err);
           setCurrentUser(RESETED_CURRENT_USER);
           navigate(APP_ROUTER.main, { replace: true });
-        })
-        .finally(() => handleLoader(false));
+        });
     }
   }, [ currentUser.isLoggedIn ]);
 
@@ -208,28 +207,9 @@ export default function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <DeviceContext.Provider value={device}>
         <Routes>
+          {/*Незащищенные авторизацией роуты*/}
           <Route path={APP_ROUTER.main}
                  element={<Main/>}
-          />
-          <Route path={APP_ROUTER.movies}
-                 element={
-                   <Movies setError={setError}
-                           movies={movies}
-                           savedMovies={savedMovies}
-                           requestStatus={requestStatus}
-                           onSave={handleSaveMovie}
-                           onDelete={handleDeleteMovie}
-                   />
-                 }
-          />
-          <Route path={APP_ROUTER.savedMovies}
-                 element={
-                   <SavedMovies movies={savedMovies}
-                                requestStatus={requestStatus}
-                                onDelete={handleDeleteMovie}
-                                setError={setError}
-                   />
-                 }
           />
           <Route path={APP_ROUTER.signin}
                  element={
@@ -245,17 +225,41 @@ export default function App() {
                    />
                  }
           />
-          <Route path={APP_ROUTER.profile}
-                 element={
-                   <Profile onLogout={handleLogout}
-                            onEdit={handleEditProfile}
-                            requestStatus={requestStatus}
-                   />
-                 }
-          />
-          <Route path={APP_ROUTER.any}
-                 element={<NotFound/>}
-          />
+          {/*Защищенные авторизацией роуты*/}
+          <Route element={<ProtectedRoute isLoggedIn={currentUser.isLoggedIn}/>}>
+            <Route path={APP_ROUTER.movies}
+                   element={
+                     <Movies setError={setError}
+                             movies={movies}
+                             savedMovies={savedMovies}
+                             requestStatus={requestStatus}
+                             onSave={handleSaveMovie}
+                             onDelete={handleDeleteMovie}
+                     />
+                   }
+            />
+            <Route path={APP_ROUTER.savedMovies}
+                   element={
+                     <SavedMovies movies={savedMovies}
+                                  requestStatus={requestStatus}
+                                  onDelete={handleDeleteMovie}
+                                  setError={setError}
+                     />
+                   }
+            />
+            <Route path={APP_ROUTER.profile}
+                   element={
+                     <Profile onLogout={handleLogout}
+                              onEdit={handleEditProfile}
+                              requestStatus={requestStatus}
+                     />
+                   }
+            />
+            {/*Перенаправление с несуществующих роутов на 404*/}
+            <Route path={APP_ROUTER.any}
+                   element={<NotFound/>}
+            />
+          </Route>
         </Routes>
         <InfoTooltip isOpen={isInfoPopupOpen}
                      onClose={closeInfoPopup}
