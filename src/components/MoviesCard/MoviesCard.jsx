@@ -1,13 +1,6 @@
 import './MoviesCard.css';
-import { MOVIES_BASE_URL } from '../../utils/config';
-import movies from '../Movies/Movies';
-import { useLocation } from 'react-router-dom';
 
 const MoviesCard = (props) => {
-  const loc = useLocation().pathname;
-
-  console.log(props.isSaved)
-
   const renderButton = () => {
     if (props.isMainMoviesPage && !props.isSaved) {
       return (

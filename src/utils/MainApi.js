@@ -46,6 +46,9 @@ class MainApi {
 
   // Получение фильмов
   getMovies() {
+    this._options.method = 'GET';
+    this._options.body = null;
+
     return this._fetch('/movies');
   }
 

@@ -63,7 +63,7 @@ const MoviesCardList = ({
         return movies.slice(0, toShow).map((movie) => {
           return (
             <li className="movies__item"
-                key={movie.movieId ? movie.movieId : movie.id}
+                key={movie.id}
             >
               <MoviesCard name={movie.nameRU}
                           duration={movie.duration}
@@ -81,7 +81,7 @@ const MoviesCardList = ({
         return movies.map((movie) => {
           return (
             <li className="movies__item"
-                key={movie.movieId ? movie.movieId : movie.id}
+                key={movie.movieId}
             >
               <MoviesCard name={movie.nameRU}
                           duration={movie.duration}
@@ -96,7 +96,6 @@ const MoviesCardList = ({
           );
         });
       }
-
     }
   };
 

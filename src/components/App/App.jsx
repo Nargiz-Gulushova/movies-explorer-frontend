@@ -9,7 +9,7 @@ import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
 import { useEffect, useRef, useState } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { DEVICE_CONFIG, MOVIES_BASE_URL } from '../../utils/config';
+import { APP_ROUTER, DEVICE_CONFIG, MOVIES_BASE_URL, REQ_MESSAGES } from '../../utils/config';
 import { DeviceContext } from '../../contexts/DeviceContext';
 import {
   INITIAL_CURRENT_USER,
@@ -84,7 +84,7 @@ export default function App() {
         .catch((err) => {
           console.error(err);
           setCurrentUser(RESETED_CURRENT_USER);
-          navigate('/', { replace: true });
+          navigate(APP_ROUTER.main, { replace: true });
         })
         .finally(() => handleLoader(false));
     }
@@ -127,10 +127,11 @@ export default function App() {
           email: userInfo.data.email,
           isLoggedIn: true,
         });
+        setInfoPopupOpen(true);
         setRequestStatus({
           isError: false,
           isLoading: false,
-          message: 'Данные обновлены!',
+          message: REQ_MESSAGES.successProfileUpdate,
         });
       })
       .catch(setError)
@@ -143,13 +144,10 @@ export default function App() {
       .then(() => {
         localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, 'true');
         setCurrentUser((u) => ({ ...u, isLoggedIn: true }));
-        navigate('/movies');
+        navigate(APP_ROUTER.movies);
       })
       .catch(setError)
       .finally(() => handleLoader(false));
-
-    // setCurrentUser(() => ({ name: 'test', email: 'pochta@test.ru', isLoggedIn: true }));
-    // navigate('/movies');
   };
 
   const handleRegister = ({ name, email, password }) => {
@@ -161,15 +159,12 @@ export default function App() {
           return {
             ...status,
             isError: false,
-            message: 'Вы успешно зарегистрировались!',
+            message: REQ_MESSAGES.successRegistration,
           };
         });
         setInfoPopupOpen(true);
-        navigate('/movies');
       })
-      .catch((err) => {
-        setError(err);
-      })
+      .catch(setError)
       .finally(() => handleLoader(false));
   };
 
@@ -178,7 +173,7 @@ export default function App() {
       .then(() => {
         localStorage.clear();
         setCurrentUser(RESETED_CURRENT_USER);
-        navigate('/', { replace: true });
+        navigate(APP_ROUTER.main, { replace: true });
       })
       .catch(console.error);
   };
@@ -196,27 +191,27 @@ export default function App() {
       movieId: movie.id,
       nameRU: movie.nameRU,
       nameEN: movie.nameEN,
-    }
+    };
 
     MAIN_API.addMovie(movieData)
-      .then(res => setSavedMovies([ ...savedMovies,  res.data]))
+      .then(res => setSavedMovies([ ...savedMovies, res.data ]))
       .catch(console.error);
   };
 
   const handleDeleteMovie = (id) => {
     MAIN_API.deleteMovie(id)
       .then(() => setSavedMovies((m) => m.filter(movie => movie._id !== id)))
-      .catch(console.error)
+      .catch(console.error);
   };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <DeviceContext.Provider value={device}>
         <Routes>
-          <Route path="/"
+          <Route path={APP_ROUTER.main}
                  element={<Main/>}
           />
-          <Route path="/movies"
+          <Route path={APP_ROUTER.movies}
                  element={
                    <Movies setError={setError}
                            movies={movies}
@@ -227,7 +222,7 @@ export default function App() {
                    />
                  }
           />
-          <Route path="/saved-movies"
+          <Route path={APP_ROUTER.savedMovies}
                  element={
                    <SavedMovies movies={savedMovies}
                                 requestStatus={requestStatus}
@@ -235,21 +230,21 @@ export default function App() {
                    />
                  }
           />
-          <Route path="/signin"
+          <Route path={APP_ROUTER.signin}
                  element={
                    <Login onLogin={handleLogin}
                           requestStatus={requestStatus}
                    />
                  }
           />
-          <Route path="/signup"
+          <Route path={APP_ROUTER.signup}
                  element={
                    <Register onRegister={handleRegister}
                              requestStatus={requestStatus}
                    />
                  }
           />
-          <Route path="/profile"
+          <Route path={APP_ROUTER.profile}
                  element={
                    <Profile onLogout={handleLogout}
                             onEdit={handleEditProfile}
@@ -257,7 +252,7 @@ export default function App() {
                    />
                  }
           />
-          <Route path="*"
+          <Route path={APP_ROUTER.any}
                  element={<NotFound/>}
           />
         </Routes>

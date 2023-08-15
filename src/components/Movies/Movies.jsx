@@ -39,6 +39,7 @@ const Movies = ({ movies, savedMovies, setError, requestStatus, onSave, onDelete
                           onChange={handleChange}
                           onCheckboxChange={handleChangeCheckbox}
                           onSubmit={handleSubmit}
+                          searchStatus={searchStatus}
         />
         <MoviesCardList movies={sortedMovies}
                         savedMovies={savedMovies}

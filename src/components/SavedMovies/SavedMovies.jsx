@@ -36,6 +36,7 @@ const SavedMovies = ({ movies, requestStatus, onDelete }) => {
                           onChange={handleChange}
                           onCheckboxChange={handleChangeCheckbox}
                           onSubmit={handleSubmit}
+                          searchStatus={searchStatus}
         />
         <MoviesCardList movies={sortedMovies}
                         savedMovies={sortedMovies}
