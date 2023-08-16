@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { LOCAL_STORAGE_SEARCH_KEY } from '../utils/config';
+import { SEARCH_MESSAGES, SHORT_FILMS_DURATION } from '../utils/vars';
 
 export const useSearch = ({
                             movies,
@@ -7,6 +8,7 @@ export const useSearch = ({
                             isSavedMoviesPage,
                             setSearchStatus,
                             setError,
+                            setPage,
                           }) => {
   // отсортированные фильмы, возвращаемые для рендера
   const [ sortedMovies, setSortedMovies ] = useState([]);
@@ -31,9 +33,24 @@ export const useSearch = ({
 
   useEffect(() => {
     if (isSavedMoviesPage) {
-      setSortedMovies(movies);
+      const savedMovies = sortMovies(searchQuery);
+      setSortedMovies(savedMovies);
+      if (savedMovies.length === 0) {
+        handleSearchError(SEARCH_MESSAGES.emptyResult)
+      }
+      if (movies.length === 0) {
+        handleSearchError(SEARCH_MESSAGES.emptySavedMovies)
+      }
     }
   }, [ isSavedMoviesPage, movies ]);
+
+  function handleSearchError(msg) {
+    setSearchStatus((s) => ({
+      ...s,
+      isError: true,
+      errorMessage: msg,
+    }));
+  }
 
   const handleChange = (e) => {
     setSearchQuery((query) => ({
@@ -45,7 +62,7 @@ export const useSearch = ({
   const handleChangeCheckbox = (e) => {
     if (!searchQuery.search && isMainMoviesPage) {
       console.log(searchQuery);
-      return setError('Для фильтрации нужно заполнить поисковый запрос.');
+      return setError(SEARCH_MESSAGES.emptyQueryForFilter);
     }
 
     setSearchQuery((query) => ({
@@ -66,7 +83,7 @@ export const useSearch = ({
 
   const sortMovies = (query) => {
     if (query.isShort) {
-      return movies.filter((movie) => movie.duration <= 40)
+      return movies.filter((movie) => movie.duration <= SHORT_FILMS_DURATION)
         .filter((movie) => {
           return convertString(movie.nameRU)
             .includes(convertString(searchQuery.search)
@@ -98,9 +115,10 @@ export const useSearch = ({
 
   const handleSubmit = (query) => {
     if (!query.search && isMainMoviesPage) {
-      return setError('Для поиска нужно ввести ключевой запрос.');
+      return setError(SEARCH_MESSAGES.emptyQuery);
     }
 
+    setPage(0);
     setSearchStatus({
       isLoading: true,
       isError: false,
@@ -112,13 +130,7 @@ export const useSearch = ({
 
     setTimeout(() => {
       if (sortedArray.length === 0) {
-        setSearchStatus(status => {
-          return {
-            ...status,
-            isError: true,
-            errorMessage: 'Ничего не найдено.',
-          };
-        });
+        handleSearchError(SEARCH_MESSAGES.emptyResult)
       }
 
       setSortedMovies(sortedArray);

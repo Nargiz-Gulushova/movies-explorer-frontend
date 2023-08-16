@@ -18,9 +18,21 @@ const RESETED_CURRENT_USER = {
   isLoggedIn: false,
 }
 
+const SHORT_FILMS_DURATION = 40;
+
+const SEARCH_MESSAGES = {
+  emptyResult: 'Ничего не найдено.',
+  emptyQuery: 'Для поиска нужно ввести ключевой запрос.',
+  emptyQueryForFilter: 'Для фильтрации нужно заполнить поисковый запрос.',
+  emptySavedMovies: 'Ваш список сохраненных фильмов пуст :(',
+  init: 'Воспользуйтесь поиском, чтобы найти фильмы.',
+}
+
 export {
   INITIAL_REQUEST_STATUS,
   LOCAL_STORAGE_TOKEN_KEY,
   INITIAL_CURRENT_USER,
   RESETED_CURRENT_USER,
+  SHORT_FILMS_DURATION,
+  SEARCH_MESSAGES,
 };

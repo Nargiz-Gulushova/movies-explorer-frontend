@@ -11,12 +11,13 @@ const MoviesCardList = ({
                           isMainMoviesPage,
                           searchStatus,
                           requestStatus,
+                          page,
+                          setPage,
                           onSave,
                           onDelete
                         }) => {
   const device = useContext(DeviceContext);
   const [ toShow, setToShow ] = useState(0);
-  const [ page, setPage ] = useState(0);
   const [ isMoreButton, setIsMoreButton ] = useState({
     show: true,
     loading: false,
@@ -103,22 +104,17 @@ const MoviesCardList = ({
 
   return (
     <section className={isMainMoviesPage ? 'movies' : 'movies movies_type_saved'}>
-
-      {searchStatus.isFirstSearch || searchStatus.isError
-        ? <h1 className={'movies__error'}>{searchStatus.errorMessage}</h1>
-        : searchStatus.isLoading || isMoreButton.loading || requestStatus.isLoading
-          ? <Preloader/>
-          : <>
-            <ul className="movies__list">{renderMovies()}</ul>
-            {showButton &&
-              <button type="button"
-                      className="movies__load-more-button button-hover"
-                      onClick={handleChangePage}>
-                Ещё
-              </button>
-            }
-          </>
+      {(searchStatus.isFirstSearch || searchStatus.isError)
+        && <h1 className={'movies__error'}>{searchStatus.errorMessage}</h1>}
+      {searchStatus.isLoading ? <Preloader/> : <ul className="movies__list">{renderMovies()}</ul>}
+      {showButton && !searchStatus.isLoading &&
+        <button type="button"
+                className="movies__load-more-button button-hover"
+                onClick={handleChangePage}>
+          Ещё
+        </button>
       }
+      {isMoreButton.loading && <Preloader/>}
     </section>
   );
 };

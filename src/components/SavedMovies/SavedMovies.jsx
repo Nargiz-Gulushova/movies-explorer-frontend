@@ -5,6 +5,7 @@ import MoviesSearchForm from '../MoviesSearchForm/MoviesSearchForm';
 import { useSearch } from '../../hooks/useSearch';
 import { useState } from 'react';
 import { LOCAL_STORAGE_SEARCH_KEY } from '../../utils/config';
+import { SEARCH_MESSAGES } from '../../utils/vars';
 
 const SavedMovies = ({ movies, requestStatus, onDelete, setError }) => {
 
@@ -12,8 +13,9 @@ const SavedMovies = ({ movies, requestStatus, onDelete, setError }) => {
     isError: false,
     isFirstSearch: !localStorage.getItem(LOCAL_STORAGE_SEARCH_KEY),
     isLoading: false,
-    errorMessage: 'Воспользуйтесь поиском, чтобы найти фильмы.',
+    errorMessage: SEARCH_MESSAGES.init,
   });
+  const [ page, setPage ] = useState(0);
 
   const {
     sortedMovies,
@@ -27,6 +29,7 @@ const SavedMovies = ({ movies, requestStatus, onDelete, setError }) => {
     isSavedMoviesPage: true,
     setSearchStatus,
     setError,
+    setPage,
   });
 
   return (
@@ -43,6 +46,8 @@ const SavedMovies = ({ movies, requestStatus, onDelete, setError }) => {
                         savedMovies={sortedMovies}
                         searchStatus={searchStatus}
                         requestStatus={requestStatus}
+                        page={page}
+                        setPage={setPage}
                         isSavedMoviesPage={true}
                         onDelete={onDelete}
         />

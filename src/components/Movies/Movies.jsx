@@ -6,6 +6,7 @@ import MoviesSearchForm from '../MoviesSearchForm/MoviesSearchForm';
 import { useState } from 'react';
 import { useSearch } from '../../hooks/useSearch';
 import { LOCAL_STORAGE_SEARCH_KEY } from '../../utils/config';
+import { SEARCH_MESSAGES } from '../../utils/vars';
 
 const Movies = ({
                   movies,
@@ -20,8 +21,9 @@ const Movies = ({
     isError: false,
     isFirstSearch: !localStorage.getItem(LOCAL_STORAGE_SEARCH_KEY),
     isLoading: false,
-    errorMessage: 'Воспользуйтесь поиском, чтобы найти фильмы.',
+    errorMessage: SEARCH_MESSAGES.init,
   });
+  const [ page, setPage ] = useState(0);
 
   const {
     sortedMovies,
@@ -35,6 +37,7 @@ const Movies = ({
     isSavedMoviesPage: false,
     setSearchStatus,
     setError,
+    setPage,
   });
 
 
@@ -55,6 +58,8 @@ const Movies = ({
                         searchStatus={searchStatus}
                         onSave={onSave}
                         onDelete={onDelete}
+                        page={page}
+                        setPage={setPage}
         />
       </main>
       <Footer/>
