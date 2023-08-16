@@ -1,0 +1,34 @@
+.nav-guest__list {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-guest__link {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px; /* 133.333% */
+}
+
+.nav-guest__link_type_login {
+  color: var(--inverted-primary-color);
+  background-color: var(--bg-blue);
+  padding: 8px 20px;
+  border-radius: 3px;
+}
+
+@media screen and (max-width: 767px) {
+  .nav-guest__list {
+    gap: 3px;
+  }
+
+  .nav-guest__link {
+    padding: 7px 12px;
+    font-size: 10px;
+    font-weight: 500;
+  }
+}
